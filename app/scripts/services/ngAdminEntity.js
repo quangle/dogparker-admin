@@ -1,27 +1,5 @@
-'use strict';
-
-/**
- * @ngdoc overview
- * @name dogparkerAdminApp
- * @description
- * # dogparkerAdminApp
- *
- * Main module of the application.
- */
-var dogparderAdminApp = angular
-  .module('dogparkerAdminApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch',
-    'ng-admin'
-  ])
-  .config(['NgAdminConfigurationProvider', 'NgAdminEntity', function (nga, NgAdminEntity) {
-    var admin = nga.application('My First Admin')
-      .baseApiUrl('http://localhost:8080/api/v1/'); // main API endpoint
-
+dogparderAdminApp.provider('NgAdminEntity', function(){
+  this.addAccountEntity = function (nga, admin) {
     var accounts = nga.entity('account');
 
     accounts.listView().fields([
@@ -48,7 +26,6 @@ var dogparderAdminApp = angular
       nga.field('type')
     ]);
 
-    admin.addEntity(accounts)
-
-    nga.configure(admin)
-  }]);
+    return accounts;
+  }
+})
